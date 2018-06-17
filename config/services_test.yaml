@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        public: true
+
+    # If you need to access services in a test, create an alias
+    # and then fetch that alias from the container. As a convention,
+    # aliases are prefixed with test. For example:
+    #
+    # test.App\Service\MyService: '@App\Service\MyService'
+
+    app.fixtures.reflection_property_accessor:
+        class: Nelmio\Alice\PropertyAccess\ReflectionPropertyAccessor
+        public: false
+        decorates: nelmio_alice.property_accessor
+        decoration_priority: -10
+        arguments: ['@app.fixtures.reflection_property_accessor.inner']

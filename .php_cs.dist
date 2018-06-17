@@ -1,0 +1,30 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('Migrations')
+    ->exclude('_support/_generated')
+    ->in(__DIR__ . '/src')
+    ->in(__DIR__ . '/tests')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@PSR2' => true,
+        '@Symfony' => true,
+        '@DoctrineAnnotation' => true,
+        'doctrine_annotation_array_assignment' => [
+            'operator' => '=',
+        ],
+        'ordered_class_elements' => true,
+        'phpdoc_order' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'ordered_imports' => true,
+        'concat_space' => ['spacing' => 'one'],
+        'general_phpdoc_annotation_remove' => [
+            'author',
+            'override',
+        ],
+        'declare_strict_types' => true,
+    ])
+    ->setFinder($finder)
+;

@@ -1,0 +1,21 @@
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix: Tester
+settings:
+    memory_limit: 2048M
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+params:
+    - .env.test
+coverage:
+    enabled: true
+    remote: false
+    include:
+        - src/*
+    exclude:
+        - src/Migrations

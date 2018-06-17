@@ -1,0 +1,88 @@
+{
+    "name": "juntereiner/docker-symfony",
+    "description": "Docker Symfony",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": "^7.2",
+        "ext-iconv": "*",
+        "myclabs/php-enum": "^1.6",
+        "ramsey/uuid": "^3.7",
+        "ramsey/uuid-doctrine": "^1.4",
+        "sensio/framework-extra-bundle": "^5.1",
+        "symfony/asset": "^4.1",
+        "symfony/console": "^4.1",
+        "symfony/flex": "^1.0",
+        "symfony/form": "^4.1",
+        "symfony/framework-bundle": "^4.1",
+        "symfony/lts": "^4@dev",
+        "symfony/monolog-bundle": "^3.1",
+        "symfony/orm-pack": "*",
+        "symfony/security-bundle": "^4.1",
+        "symfony/serializer-pack": "*",
+        "symfony/twig-bundle": "^4.1",
+        "symfony/validator": "^4.1",
+        "symfony/web-link": "^4.1",
+        "symfony/webpack-encore-pack": "*",
+        "symfony/yaml": "^4.1"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.4",
+        "doctrine/data-fixtures": "^1.3",
+        "friendsofphp/php-cs-fixer": "^2.12",
+        "hautelook/alice-bundle": "^2.0",
+        "phpstan/phpstan-doctrine": "^0.9.1",
+        "phpstan/phpstan-phpunit": "^0.9.4",
+        "phpstan/phpstan-shim": "^0.9.2",
+        "symfony/debug-pack": "*",
+        "symfony/dotenv": "^4.1",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/profiler-pack": "*",
+        "symfony/test-pack": "^1.0",
+        "symfony/web-server-bundle": "^4.1",
+        "timeweb/phpstan-enum": "^1.2"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php71": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php56": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false
+        }
+    }
+}

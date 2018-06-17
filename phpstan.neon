@@ -1,0 +1,8 @@
+parameters:
+	universalObjectCratesClasses:
+		- MyCLabs\Enum\Enum
+
+includes:
+	- vendor/phpstan/phpstan-doctrine/extension.neon
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/timeweb/phpstan-enum/extension.neon

@@ -1,0 +1,51 @@
+version: '3.2'
+
+services:
+  http:
+    image: nginx:1-alpine
+    depends_on:
+      - engine
+    ports:
+      - 8000:80
+    volumes:
+      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./public/:/srv/public/:ro
+
+  engine:
+    build:
+      context: ./docker/engine
+    depends_on:
+      - database
+    working_dir: /srv
+    volumes:
+      - ./:/srv/
+      - ./docker/engine/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro,cached
+      - ~/.ssh/id_rsa:/home/batman/.ssh/id_rsa:rw,cached
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa:rw,cached
+
+  database:
+      image: mariadb:10.3
+      environment:
+        - "MYSQL_ROOT_PASSWORD=dev"
+        - "MYSQL_USER=symfony"
+        - "MYSQL_PASSWORD=symfony"
+        - "MYSQL_DATABASE=symfony"
+      volumes:
+        - database:/var/lib/mysql
+        - ./docker/mysql/db-test.sql:/docker-entrypoint-initdb.d/db-test.sql:rw
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    depends_on:
+      - database
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_PORT=3306
+      - PMA_HOST=database
+      - PMA_USER=symfony
+      - PMA_PASSWORD=symfony
+
+volumes:
+  database: ~
